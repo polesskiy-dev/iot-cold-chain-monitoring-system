@@ -1,9 +1,14 @@
-service: iot-cold-chain-monitoring-server-v1
+service: iot-cold-chain-monitoring-server
 frameworkVersion: '3'
+
+custom:
+  stage: ${opt:stage, 'dev'}
 
 provider:
   name: aws
   runtime: nodejs18.x
+  stage: ${self:custom.stage}
+  region: eu-west-1
 
 functions:
   api:

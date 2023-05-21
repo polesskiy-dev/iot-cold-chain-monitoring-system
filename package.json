@@ -1,6 +1,6 @@
 {
-  "name": "iot-cold-chain-monitoring-server-v1",
-  "version": "1.0.0",
+  "name": "iot-cold-chain-monitoring-server",
+  "version": "0.0.1",
   "description": "",
   "dependencies": {
     "express": "^4.18.2",
