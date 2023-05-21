@@ -1,0 +1,12 @@
+service: iot-cold-chain-monitoring-server-v1
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: '*'
