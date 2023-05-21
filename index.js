@@ -4,13 +4,7 @@ const app = express();
 
 app.get("/", (req, res, next) => {
   return res.status(200).json({
-    message: "Hello from root!",
-  });
-});
-
-app.get("/path", (req, res, next) => {
-  return res.status(200).json({
-    message: "Hello from path!",
+    message: "Hello from root! deploy should work!",
   });
 });
 
