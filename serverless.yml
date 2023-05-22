@@ -2,13 +2,18 @@ service: iot-cold-chain-monitoring-server
 frameworkVersion: '3'
 
 custom:
-  stage: ${opt:stage, 'dev'}
+  stage: 'dev'
 
 provider:
   name: aws
   runtime: nodejs18.x
   stage: ${self:custom.stage}
   region: eu-west-1
+
+resources:
+  Resources:
+    CognitoUserPool: ${file(resources/cognito-users.yml):CognitoUserPool}
+    CognitoUserPoolClient: ${file(resources/cognito-users.yml):CognitoUserPoolClient}
 
 functions:
   api:
