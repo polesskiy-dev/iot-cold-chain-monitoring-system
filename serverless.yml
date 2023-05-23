@@ -10,7 +10,17 @@ provider:
   stage: ${self:custom.stage}
   region: eu-west-1
   environment:
-    USER_POOL_CLIENT_ID: ${self:service}-${self:custom.stage}-user-pool-client
+    USER_POOL_CLIENT_ID: !Ref CognitoUserPool
+#    USER_POOL_CLIENT_ID: ${self:service}-${self:custom.stage}-user-pool-client
+# By default, one IAM Role is shared by all the Lambda functions in your service
+# TODO assign specific Policies to specific roles, especially for sign up
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - cognito-idp:AdminCreateUser
+          Resource: '*'
 
 resources:
   Resources:
@@ -33,6 +43,7 @@ functions:
           path: /auth/signup
           method: POST
           cors: true
+
 
 
 #  catchAllAny:

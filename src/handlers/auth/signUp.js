@@ -14,16 +14,16 @@ app.use(async (req, res, next) => {
         // Validate request body
         await userSchema.validate(req.body);
 
-        const { username, email, password } = req.body;
+        const { username, password } = req.body;
 
         // Create user in Cognito
         const cognito = new AWS.CognitoIdentityServiceProvider();
         const params = {
-            UserPoolId: userPoolClientId, // TODO make Cognito User Pool ID as a variable
+            UserPoolId: userPoolClientId,
             Username: username,
             TemporaryPassword: password,
             UserAttributes: [
-                { Name: 'email', Value: email },
+                // { Name: 'email', Value: email },
                 // TODO Add type attribute
             ]
         };
