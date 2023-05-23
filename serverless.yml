@@ -9,6 +9,8 @@ provider:
   runtime: nodejs18.x
   stage: ${self:custom.stage}
   region: eu-west-1
+  environment:
+    USER_POOL_CLIENT_ID: ${self:service}-${self:custom.stage}-user-pool-client
 
 resources:
   Resources:
@@ -16,16 +18,16 @@ resources:
     CognitoUserPoolClient: ${file(resources/cognito-users.yml):CognitoUserPoolClient}
 
 functions:
-  signIn:
-    handler: src/handlers/auth.signIn
-    events:
-      - httpApi:
-          path: /auth/signin
-          method: POST
-          cors: true
+#  signIn:
+#    handler: src/handlers/auth.signIn
+#    events:
+#      - httpApi:
+#          path: /auth/signin
+#          method: POST
+#          cors: true
 
   signUp:
-    handler: src/handlers/auth.signUp
+    handler: src/handlers/auth/signUp.handler
     events:
       - httpApi:
           path: /auth/signup
@@ -33,7 +35,7 @@ functions:
           cors: true
 
 
-  catchAllAny:
-    handler: index.catchAllAny
-    events:
-      - httpApi: '*'
+#  catchAllAny:
+#    handler: index
+#    events:
+#      - httpApi: '*'
