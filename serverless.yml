@@ -31,3 +31,9 @@ functions:
           path: /auth/signup
           method: POST
           cors: true
+
+
+  catchAllAny:
+    handler: index.catchAllAny
+    events:
+      - httpApi: '*'
