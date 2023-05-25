@@ -14,18 +14,19 @@ provider:
 #    USER_POOL_CLIENT_ID: ${self:service}-${self:custom.stage}-user-pool-client
 # By default, one IAM Role is shared by all the Lambda functions in your service
 # TODO assign specific Policies to specific roles, especially for sign up
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - cognito-idp:AdminCreateUser
-          Resource: '*'
+#  iam:
+#    role:
+#      statements:
+#        - Effect: Allow
+#          Action:
+#            - cognito-idp:AdminCreateUser
+#          Resource: '*'
 
 resources:
   Resources:
     CognitoUserPool: ${file(resources/cognito-users.yml):CognitoUserPool}
     CognitoUserPoolClient: ${file(resources/cognito-users.yml):CognitoUserPoolClient}
+    AdminManageUsersRole: ${file(resources/iam/AdminManageUsersRole.yml):AdminManageUsersRole}
 
 functions:
 #  signIn:
@@ -38,13 +39,12 @@ functions:
 
   signUp:
     handler: src/handlers/auth/signUp.handler
+    role: AdminManageUsersRole
     events:
       - httpApi:
           path: /auth/signup
           method: POST
           cors: true
-
-
 
 #  catchAllAny:
 #    handler: index

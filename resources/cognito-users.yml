@@ -2,7 +2,7 @@ CognitoUserPool:
   Type: "AWS::Cognito::UserPool"
   Properties:
     MfaConfiguration: OFF
-    UserPoolName: ${self:service}-${self:custom.stage}-user-pool
+    UserPoolName: ${self:service}-${self:provider.stage}-user-pool
     UsernameAttributes:
       - email
     Policies:
