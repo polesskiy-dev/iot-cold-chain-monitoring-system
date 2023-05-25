@@ -46,6 +46,15 @@ functions:
           method: POST
           cors: true
 
+  listUsers:
+    handler: src/handlers/users/users.handler
+    role: AdminManageUsersRole
+    events:
+      - httpApi:
+          path: /users
+          method: GET
+          cors: true
+
 #  catchAllAny:
 #    handler: index
 #    events:

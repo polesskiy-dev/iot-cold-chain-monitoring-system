@@ -30,4 +30,5 @@ AdminManageUsersRole:
                 - Effect: Allow
                   Action:
                     - cognito-idp:AdminCreateUser
+                    - cognito-idp:ListUsers
                   Resource: '*'
