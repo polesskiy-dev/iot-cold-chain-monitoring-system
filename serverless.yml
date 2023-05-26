@@ -11,6 +11,15 @@ provider:
   region: eu-west-1
   environment:
     USER_POOL_CLIENT_ID: !Ref CognitoUserPool
+  httpApi:
+    authorizers:
+      someJwtAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://cognito-idp.${region}.amazonaws.com/${cognitoPoolId}
+        audience:
+          - ${client1Id}
+          - ${client2Id}
 #    USER_POOL_CLIENT_ID: ${self:service}-${self:custom.stage}-user-pool-client
 # By default, one IAM Role is shared by all the Lambda functions in your service
 # TODO assign specific Policies to specific roles, especially for sign up
@@ -47,7 +56,7 @@ functions:
           cors: true
 
   listUsers:
-    handler: src/handlers/users/users.handler
+    handler: src/handlers/users/listUsers.handler
     role: AdminManageUsersRole
     events:
       - httpApi:

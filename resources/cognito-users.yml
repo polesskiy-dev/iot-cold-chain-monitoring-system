@@ -20,3 +20,31 @@ CognitoUserPoolClient:
     GenerateSecret: False
     UserPoolId:
       Ref: CognitoUserPool
+
+# Cognito roles @see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolgroup.html
+UnauthorizedGroup:
+  Type: AWS::Cognito::UserPoolGroup
+  Properties:
+    GroupName: Unauthorized
+    Precedence: Null
+#    RoleArn: TODO add appropriate IAM role
+    UserPoolId:
+      Ref: CognitoUserPool
+
+OrganizationGroup:
+  Type: AWS::Cognito::UserPoolGroup
+  Properties:
+    GroupName: Organization
+    Precedence: Null
+    #    RoleArn: TODO add appropriate IAM role
+    UserPoolId:
+      Ref: CognitoUserPool
+
+OperatorGroup:
+  Type: AWS::Cognito::UserPoolGroup
+  Properties:
+    GroupName: Operator
+    Precedence: Null
+    #    RoleArn: TODO add appropriate IAM role
+    UserPoolId:
+      Ref: CognitoUserPool

@@ -1,6 +1,5 @@
 const serverless = require("serverless-http");
 const express = require("express");
-const userSchema = require("../../models/user.schema");
 const AWS = require("aws-sdk");
 
 const app = express();
